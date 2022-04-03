@@ -2,6 +2,12 @@ void setup(){
 
 }
 
+//nextState val:
+//0 for DISABLED state
+//1 for IDLE state
+//2 for ERROR state
+//3 for RUNNING state
+
 void loop(){
   
 }
@@ -28,9 +34,9 @@ int idle(){
   //turn green LED to Off
   
   if( monitorTemp() > thresh){
-   return  //return int value corresponding to 'running'
+   return  3; //return int value corresponding to 'running'
   }else if( monitorWaterLevel() < minWaterLvl){
-   return //return int value corresponding to 'error' 
+   return 2; //return int value corresponding to 'error' 
   }
 }
 
@@ -44,11 +50,14 @@ int error(){
   
  if( monitorWaterLevel() > minWaterLvl ){
   //stop displaying error message
-  return //return to IDLE
+  return 1; //return to IDLE
  }else{
-  return //return back to ERROR 
+  return 2; //return back to ERROR 
  }
 }
 
-
-int running();
+int running(){
+ //turn blue LED on 
+ //turn fan motor on
+  
+}
