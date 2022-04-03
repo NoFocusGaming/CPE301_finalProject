@@ -12,16 +12,23 @@ int monitorWaterLevel();
 int monitorHumidity();
 
 //different system states
-void disabled(){
+int disabled(){
   //yellow LED on
   //use IRS to monitor start button
 
 }  
   
-void idle(){
+int idle(){
   //call monitorTemp()
     //transition to 'running' state when temp > thresh
+  while( (monitorTemp() <= thresh) && (monitorWaterLevel() > minWaterLvl));
+
+  if( monitorTemp() > thresh){
+   return  //return int value corresponding to 'running'
+  }else if( monitorWaterLevel() < minWaterLvl){
+   return //return int value corresponding to 'error' 
+  }
 }
 
-void error();
-void running();
+int error();
+int running();
