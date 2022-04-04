@@ -1,3 +1,6 @@
+int thresh; //Global variable for temperature threshold
+int minWaterlvl; //Global var for min water level before ERROR
+
 void setup(){
 
 }
@@ -37,8 +40,16 @@ int monitorWaterLevel();
 int monitorHumidity();
 
 void ventChanges(){
- // read vent potentiometer level
- // adjust motor accordingly
+ static prevVentState; //variable containing value of the previous vent state for detection of changes
+  
+  // read vent potentiometer level
+  currVentState = ;
+ 
+  if( currVentState != prevVentState){  
+    // adjust motor accordingly
+    // Report Change in Vent-State w/ Real Time Clock to Serial Port 
+    prevVentState = currVentState;
+  }
 }
 
 //different system states
