@@ -44,11 +44,8 @@ int disabled(){
 }  
   
 int idle(){
-<<<<<<< HEAD
-=======
-  //turn green LED to On
+  //turn green LED on
   
->>>>>>> 7d122b72a0273ab81b24d260c349cdd09571acf0
   //call monitorTemp()
     //transition to 'running' state when temp > thresh
   while( (monitorTemp() <= thresh) && (monitorWaterLevel() > minWaterLvl));
@@ -59,6 +56,8 @@ int idle(){
    return  3; //return int value corresponding to 'running'
   }else if( monitorWaterLevel() < minWaterLvl){
    return 2; //return int value corresponding to 'error' 
+  }else{
+   return 1; //return back to 'idle' state
   }
 }
 
@@ -81,5 +80,18 @@ int error(){
 int running(){
  //turn blue LED on 
  //turn fan motor on
+  
+ while( (monitorTemp() > thresh) && (monitorWaterLevel() > minWaterLvl));
+  
+ //turn blue LED off
+ //turn fan motor off
+  
+ if( monitorTemp() <= thresh){
+   return  1; //return int value corresponding to 'idle' state
+  }else if( monitorWaterLevel() < minWaterLvl){
+   return 2; //return int value corresponding to 'error' 
+  }else{
+    return 3; //stay in 'running' state 
+  }
   
 }
