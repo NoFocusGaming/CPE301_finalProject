@@ -9,25 +9,26 @@ void setup(){
 //3 for RUNNING state
 
 void loop(){
+  //set starting state to disabled
   int nextState = disabled();
+
+  //loop through states until disabled code it returned
   while (nextState != 0) {
     switch (nextState)
     {
-    case 1:
+    case 1: //idle code
       nextState = idle();
       break;
-    case 2: 
+    case 2: //error code
       nextState = error();
       break;
-    case 3: 
+    case 3: //running code
       nextState = running();
       break;
     default:
       break;
     }
   }
-
-
 }
 
 //pseudocode of main functions we will need
@@ -44,14 +45,15 @@ int disabled(){
 }  
   
 int idle(){
-<<<<<<< HEAD
-=======
-  //turn green LED to On
-  
->>>>>>> 7d122b72a0273ab81b24d260c349cdd09571acf0
   //call monitorTemp()
     //transition to 'running' state when temp > thresh
-  while( (monitorTemp() <= thresh) && (monitorWaterLevel() > minWaterLvl));
+  while( (monitorTemp() <= thresh) && (monitorWaterLevel() > minWaterLvl)) 
+  {
+    if (/*Disable button is pressed*/) 
+    {
+      return 0;
+    }
+  }
 
   //turn green LED to Off
   
