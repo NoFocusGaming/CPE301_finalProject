@@ -36,11 +36,18 @@ int monitorTemp();
 int monitorWaterLevel();
 int monitorHumidity();
 
+void ventChanges(){
+ // read vent potentiometer level
+ // adjust motor accordingly
+}
+
 //different system states
 int disabled(){
   //yellow LED on
   //use IRS to monitor start button
-  while (/*not button pressed*/);
+  while (/*not button pressed*/){
+   ventChanges(); 
+  }
   return 1;
 }  
   
@@ -61,6 +68,8 @@ int idle(){
    return  3; //return int value corresponding to 'running'
   }else if( monitorWaterLevel() < minWaterLvl){
    return 2; //return int value corresponding to 'error' 
+  }else{
+   return 1; //return back to 'idle' state
   }
 }
 
@@ -68,7 +77,13 @@ int error(){
  //turn red LED on  
  //display error message on LCD
   
- while( /*check for reset button to be pressed*/ );
+ while( /*check for reset button to be pressed*/ ){
+  if (/*Disable button is pressed*/) 
+  {
+    return 0;
+  }
+  ventChanges(); 
+ }
   
  //turn red LED off
   
@@ -83,5 +98,24 @@ int error(){
 int running(){
  //turn blue LED on 
  //turn fan motor on
+  
+ while( (monitorTemp() > thresh) && (monitorWaterLevel() > minWaterLvl)){
+  if (/*Disable button is pressed*/) 
+  {
+    return 0;
+  }
+  ventChanges(); 
+ }  
+  
+ //turn blue LED off
+ //turn fan motor off
+  
+ if( monitorTemp() <= thresh){
+   return  1; //return int value corresponding to 'idle' state
+  }else if( monitorWaterLevel() < minWaterLvl){
+   return 2; //return int value corresponding to 'error' 
+  }else{
+    return 3; //stay in 'running' state 
+  }
   
 }
