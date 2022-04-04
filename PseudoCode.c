@@ -53,9 +53,10 @@ int disabled(){
   
 int idle(){
   //call monitorTemp()
-    //transition to 'running' state when temp > thresh
+  //transition to 'running' state when temp > thresh
   while( (monitorTemp() <= thresh) && (monitorWaterLevel() > minWaterLvl)) 
   {
+    //check if disable button is pressed
     if (/*Disable button is pressed*/) 
     {
       return 0;
@@ -78,6 +79,7 @@ int error(){
  //display error message on LCD
   
  while( /*check for reset button to be pressed*/ ){
+  //check if disable button is pressed
   if (/*Disable button is pressed*/) 
   {
     return 0;
@@ -100,6 +102,7 @@ int running(){
  //turn fan motor on
   
  while( (monitorTemp() > thresh) && (monitorWaterLevel() > minWaterLvl)){
+  //check if disable button is pressed
   if (/*Disable button is pressed*/) 
   {
     return 0;
